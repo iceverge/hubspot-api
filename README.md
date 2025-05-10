@@ -19,6 +19,12 @@ This PHP API serves as a backend integration for HubSpot using OAuth2 authentica
 - Composer
 - cURL enabled in PHP
 - A valid HubSpot App with OAuth credentials
+- Donwload the cert at https://curl.se/ca/cacert.pem
+- Enable the in yor php.ini
+  ```bash
+  sample path in windows
+  curl.cainfo = "C:\php\extras\ssl\cacert.pem" 
+  openssl.cafile = "C:\php\extras\ssl\cacert.pem" 
 
 ---
 
@@ -37,5 +43,5 @@ This PHP API serves as a backend integration for HubSpot using OAuth2 authentica
   REDIRECT_URI=http://localhost:8000/oauth/callback
   TOKEN_FILE=storage/token.json
 
-## Run serve
+## Run server
   php -S localhost:8000
