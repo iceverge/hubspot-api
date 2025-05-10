@@ -30,7 +30,8 @@ This PHP API serves as a backend integration for HubSpot using OAuth2 authentica
    cd hubspot-api
    composer install
 
-## ENV
+## Setup env
+  ```bash
   CLIENT_ID=your_hubspot_client_id
   CLIENT_SECRET=your_hubspot_client_secret
   REDIRECT_URI=http://localhost:8000/oauth/callback
