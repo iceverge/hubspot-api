@@ -20,8 +20,12 @@ This PHP API serves as a backend integration for HubSpot using OAuth2 authentica
 - cURL enabled in PHP
 - A valid HubSpot App with OAuth credentials
 - Donwload the cert at https://curl.se/ca/cacert.pem
-- Enable the in yor php.ini
+- Open your PHP installation directory.
+- Locate and open your php.ini file (you can find its location by running php --ini in your terminal).
+- Search for this line (might be commented out):
   ```bash
+  ;curl.cainfo =
+  and update it to:
   sample path in windows
   curl.cainfo = "C:\php\extras\ssl\cacert.pem" 
   openssl.cafile = "C:\php\extras\ssl\cacert.pem" 
