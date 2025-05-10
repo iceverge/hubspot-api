@@ -26,8 +26,9 @@ This PHP API serves as a backend integration for HubSpot using OAuth2 authentica
   ```bash
   ;curl.cainfo =
   ```
-  # and update it to:
-  # sample path in windows
+  and update it to:
+  sample path in windows
+  
   ```bash
   curl.cainfo = "C:\php\extras\ssl\cacert.pem" 
   openssl.cafile = "C:\php\extras\ssl\cacert.pem" 
