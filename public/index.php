@@ -47,7 +47,11 @@ switch ($uri) {
         break;
 
     case '/contacts':
-        echo json_encode(HubspotService::getContacts());
+        echo json_encode(HubspotService::getCachedContacts());
+        break;
+
+    case '/contacts/properties':
+        echo json_encode(HubspotService::getContactProperties());
         break;
 
     case '/valid-token':

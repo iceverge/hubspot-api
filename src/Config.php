@@ -17,6 +17,7 @@ class Config
             'client_secret' => $_ENV['CLIENT_SECRET'],
             'redirect_uri'  => $_ENV['REDIRECT_URI'] . "/auth-callback",
             'token_file'    => __DIR__ . '/../' . $_ENV['TOKEN_FILE'],
+            'cache_file'    => __DIR__ . '/../storage/cache/contacts.json',
         ];
     }
 }
