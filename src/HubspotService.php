@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 
 class HubspotService
 {
-    public static function getToken(): ?array
+    public function getToken(): ?array
     {
         $path = Config::get()['token_file'];
         if (! file_exists($path)) {
@@ -42,24 +42,7 @@ class HubspotService
         return $token;
     }
 
-    public static function getCachedContacts(): array
-    {
-        $config = Config::get();
-
-        $cacheFile = $config['cache_file'];
-        $expire    = 60 * 10;
-
-        if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $expire) {
-            return json_decode(file_get_contents($cacheFile), true);
-        }
-
-        $contacts = self::getContacts();
-        file_put_contents($cacheFile, json_encode($contacts));
-
-        return $contacts;
-    }
-
-    public static function getContacts(): array
+    public function getCompanies(): array
     {
         $token = self::getToken();
         if (! $token) {
@@ -67,16 +50,14 @@ class HubspotService
         }
 
         $client   = new Client();
-        $response = $client->get('https://api.hubapi.com/crm/v3/objects/contacts', [
+        $response = $client->get('https://api.hubapi.com/crm/v3/objects/companies', [
             'headers' => [
                 'Authorization' => "Bearer {$token['access_token']}",
             ],
             'query'   => [
                 'properties' => '
-                    firstname,
-                    lastname,
-                    email,
-                    phone,
+                    name,
+                    domain,
                     hs_v2_date_entered_customer,
                     hs_v2_date_entered_lead',
                 'limit'      => 100,
@@ -86,7 +67,7 @@ class HubspotService
         return json_decode($response->getBody(), true);
     }
 
-    public static function getContactProperties(): array
+    public static function getDeals(): array
     {
         $token = self::getToken();
         if (! $token) {
@@ -94,9 +75,17 @@ class HubspotService
         }
 
         $client   = new Client();
-        $response = $client->get('https://api.hubapi.com/crm/v3/objects/contacts/properties', [
+        $response = $client->get('https://api.hubapi.com/crm/v3/objects/{something}', [
             'headers' => [
                 'Authorization' => "Bearer {$token['access_token']}",
+            ],
+            'query'   => [
+                'properties' => '
+                    name,
+                    domain,
+                    hs_v2_date_entered_customer,
+                    hs_v2_date_entered_lead',
+                'limit'      => 100,
             ],
         ]);
 

@@ -4,6 +4,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
+use App\Contact;
 use App\HubspotService;
 use Dotenv\Dotenv;
 
@@ -16,6 +17,8 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
+
+$contact = new Contact();
 
 switch ($uri) {
     case '/':
@@ -47,11 +50,12 @@ switch ($uri) {
         break;
 
     case '/contacts':
-        echo json_encode(HubspotService::getCachedContacts());
+        $contacts = $contact->getCachedContacts();
+        echo json_encode($contacts);
         break;
 
     case '/contacts/properties':
-        echo json_encode(HubspotService::getContactProperties());
+        echo json_encode($contact->getContactProperties());
         break;
 
     case '/valid-token':
