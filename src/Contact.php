@@ -6,18 +6,6 @@ use GuzzleHttp\Client;
 
 class Contact extends HubspotService
 {
-    // private $hubspotService;
-
-    // public function __construct(HubspotService $hubspotService)
-    // {
-    //     $this->hubspotService = $hubspotService;
-    // }
-
-    // public static function getToken(): ?array
-    // {
-    //     return HubspotService::getToken();
-    // }
-
     public function getCachedContacts(): array
     {
         $config = Config::get();

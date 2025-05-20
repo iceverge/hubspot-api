@@ -20,6 +20,8 @@ $dotenv->load();
 
 $contact = new Contact();
 
+$hobspotService = new HubspotService();
+
 switch ($uri) {
     case '/':
         echo json_encode(['status' => 'HubSpot API is running']);
@@ -27,7 +29,7 @@ switch ($uri) {
 
     case '/auth':
         // Check if the token is already saved
-        $token = HubspotService::getValidToken();
+        $token = $hobspotService->getValidToken();
         if ($token) {
             echo json_encode(['status' => 'connected']);
             break;
@@ -59,7 +61,7 @@ switch ($uri) {
         break;
 
     case '/valid-token':
-        $token = HubspotService::getValidToken();
+        $token = $hobspotService->getValidToken();
         if ($token) {
             echo json_encode(['isValid' => true]);
         } else {
