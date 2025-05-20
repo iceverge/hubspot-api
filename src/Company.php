@@ -1,4 +1,5 @@
 <?php
+namespace App;
 
 use App\HubspotService;
 use GuzzleHttp\Client;
